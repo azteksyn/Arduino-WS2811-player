@@ -3,7 +3,7 @@
 FASTLED_USING_NAMESPACE
 
 //  Christmas lights using ws2811 5 meter strip, it plays through a number of patterns and has 2 potentiometers for speed and brightness
-
+// pots are wired to analoge pins 0 & 1
 // Jay O'Dea, December 2016
 
 #if defined(FASTLED_VERSION) && (FASTLED_VERSION < 3001000)
@@ -19,14 +19,14 @@ CRGB leds[NUM_LEDS];
 
 #define BRIGHTNESS          255
 
-//#define MAX_BRIGHTNESS 255      // Thats full on, watch the power!
-//#define MIN_BRIGHTNESS 32       // set to a minimum of 25%
+#define MAX_BRIGHTNESS 255      // Thats full on, watch the power!
+#define MIN_BRIGHTNESS 32       // set to a minimum of 25%
 
 
 #define FRAMES_PER_SECOND  30
 
 
-//const int brightnessInPin = A0;  // The Analog input pin that the brightness control potentiometer is attached to.
+const int brightnessInPin = A0;  // The Analog input pin that the brightness control potentiometer is attached to.
 
 
 uint8_t hue = 32;
@@ -38,11 +38,6 @@ int step = -1;
 int maxSteps = 5;
 float fadeRate = 0.3;
 int diff;
-
-//background color
-//uint32_t currentBg = random(256);
-//uint32_t nextBg = currentBg;
-
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -75,9 +70,9 @@ uint8_t gHueDelta2 = -5;
   
 void loop()
 {
- // int mappedValue = map(analogRead(brightnessInPin), 0, 1023, 0, 255);
- //FastLED.setBrightness(constrain(mappedValue, MIN_BRIGHTNESS, MAX_BRIGHTNESS));
- //int mappedHue;  
+ int mappedValue = map(analogRead(brightnessInPin), 0, 1023, 0, 255);
+ FastLED.setBrightness(constrain(mappedValue, MIN_BRIGHTNESS, MAX_BRIGHTNESS));
+ int mappedHue;  
  
  // Call the current pattern function once, updating the 'leds' array
   gPatterns[gCurrentPatternNumber]();
