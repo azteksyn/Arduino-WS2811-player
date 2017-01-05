@@ -2,7 +2,7 @@
 
 FASTLED_USING_NAMESPACE
 
-// Mums Christmas lights
+//  Christmas lights using ws2811 5 meter strip, it plays through a number of patterns and has 2 potentiometers for speed and brightness
 
 // Jay O'Dea, December 2016
 
